@@ -1,0 +1,41 @@
+<script type='text/javascript'>
+$(function() {
+  // These settings override the defaults set in application.coffee. You can do this on a per dashboard basis.
+  //Dashing.gridsterLayout('[{"col":2,"row":1},{"col":1,"row":1},{"col":3,"row":1},{"col":2,"row":2},{"col":3,"row":2},{"col":1,"row":2},{"col":5,"row":1},{"col":4,"row":2},{"col":2,"row":3}]')
+  //Dashing.widget_base_dimensions = [370, 340]
+  Dashing.numColumns = 4
+});
+</script>
+
+<% content_for(:title) { "AMG" } %>
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1" style="vertical-align: top;">
+      <div id="summary" data-id="summary" data-view="Summary" data-unordered="true" data-title="Nagios alerts" style="background-color: #4b4b4b; vertical-align: top;"></div>
+    </li>
+    <li data-row="1" data-col="4" data-sizex="2" data-sizey="1">
+      <div id="thruk" data-id="thruk" data-view="Thruk" data-unordered="true" data-title="Nagios alerts" style="background-color: #4b4b4b; vertical-align: top;"></div>
+    </li>
+    <!--
+    <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+      <div class="munin" data-id="munin_http" data-view="Image" data-unordered="true" data-title="Munin graphs HTTP" style="background-color: #4b4b4b;"></div>
+    </li>
+    <li data-row="2" data-col="3" data-sizex="2" data-sizey="1">
+      <div class="munin" data-id="munin_bw" data-view="Image" data-unordered="true" data-title="Munin graphs BW" style="background-color: #4b4b4b;"></div>
+    </li>
+    -->
+    <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="no_such_file_or_directory" data-view="Graph" data-title="HTTP errors 404" style="background-color:#4b4b4b;"></div>
+    </li>
+    <li data-row="2" data-col="3" data-sizex="2" data-sizey="1">
+      <div data-id="php" data-view="Graph" data-title="PHP notices, errors ..." style="background-color:#4b4b4b;"></div>
+    </li>
+
+    <li data-row="3" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="upstream_timed_out" data-view="Graph" data-title="Upstream timed out" style="background-color:#4b4b4b;"></div>
+    </li>
+    <li data-row="3" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="segfault" data-view="Graph" data-title="Segfault" style="background-color:#4b4b4b;"></div>
+    </li>
+  </ul>
+</div>

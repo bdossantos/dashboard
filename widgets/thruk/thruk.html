@@ -1,0 +1,32 @@
+<table class="table ctr">
+  <!--
+  <thead>
+    <tr>
+      <td>Host</td>
+      <td>Service</td>
+      <td>Time</td>
+      <td>Detail</td>
+    </tr>
+  </thead>
+  -->
+  <tbody>
+    <tr>
+      <td colspan="3">
+        <h1 style="text-align: center;">
+          Last alerts
+        </h1>
+      </td>
+    </tr>
+    <tr data-foreach-item="items">
+      <td class="hostname" data-bind="item.hostname"></td>
+      <td class="badge">
+        <span data-bind-class="item.state | downcase" data-bind="item.state"></span>
+      </td>
+      <!--<td data-bind="item.detail" style="font-size: 12px;"></td>-->   
+      <td data-bind="item.description"></td>
+      <!--<td data-bind="item.last_check"></td>-->
+    </tr>
+  </tbody>
+</table>
+
+<i style="font-size:10px;color:#ddd;" class="updated-at" data-bind="updatedAtMessage"></i>
