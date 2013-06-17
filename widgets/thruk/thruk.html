@@ -11,13 +11,13 @@
   -->
   <tbody>
     <tr>
-      <td colspan="3">
+      <td colspan="4">
         <h1 style="text-align: center;">
           Last alerts
         </h1>
       </td>
     </tr>
-    <tr data-foreach-item="items">
+    <tr data-foreach-item="items" style="text-align: left;">
       <td class="hostname" data-bind="item.hostname"></td>
       <td class="badge">
         <span data-bind-class="item.state | downcase" data-bind="item.state"></span>
