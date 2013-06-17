@@ -5,7 +5,9 @@
 ### dependencies
 
 ```bash
+gem install bundler
 bundle instal
+dashing start -a 127.0.0.1 -p 3030 -u www-data -g www-data -d
 ```
 
 ### Env variables
@@ -30,7 +32,7 @@ Install x11 server utils and unclutter :
 apt-get install x11-xserver-utils unclutter
 ```
 
-edit /etc/xdg/lxsession/LXDE/autostart :
+edit `/etc/xdg/lxsession/LXDE/autostar` :
 
 ```
 @lxpanel --profile LXDE
