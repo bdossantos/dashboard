@@ -26,10 +26,10 @@ export PAPERTRAIL_TOKEN=''
 
 ### Start browser on boot
 
-Install x11 server utils and unclutter :
+Install chromium, x11 server utils and unclutter :
 
 ```
-apt-get install x11-xserver-utils unclutter
+apt-get install chromium x11-xserver-utils unclutter
 ```
 
 edit `/etc/xdg/lxsession/LXDE/autostar` :
@@ -42,7 +42,8 @@ edit `/etc/xdg/lxsession/LXDE/autostar` :
 @xset -dpms       # Turn off power saving
 @xset s noblank   # Disable screen blanking
 @unclutter        # Hide the mouse cursor
-@midori -e Fullscreen -a  http://dashboard.domain.tld
+@midori -e Fullscreen -a  http://dashboard.domain.tld       # Launch dashboard at boot in midori
+#@chromium --kiosk --incognito http://dashboard.domain.tld  # Or in Chromium
 ```
 
 ### Screen resolution
