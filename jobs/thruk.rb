@@ -34,7 +34,7 @@ SCHEDULER.every '15s' do
       end
 
       begin
-        time = Time.at(alert['last_check']).to_datetime
+        time = Time.at(alert['last_check'].to_i)
       rescue
         time = 'N/A'
       end
