@@ -317,7 +317,7 @@ table {
 
 .badge span {
   display: inline-block;
-  padding: 10px 8px;
+  padding: 12px 12px;
   font-weight: bold;
   line-height: 14px;
   color: #ffffff;
@@ -347,8 +347,9 @@ table {
   background-color: #fff;
 }
 
-td.badge, .ctr {
+td.badge {
   text-align: center;
+  font-size: 32px;
 }
 
 // ----------------------------------------------------------------------------
