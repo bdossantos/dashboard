@@ -20,5 +20,7 @@ searches.each do |search|
     points << { x: last_x, y: json['events'].count  }
     send_event search.downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, ''), 
               { points: points }
+
+    points = [] if last_x % 15 == 0
   end
 end
