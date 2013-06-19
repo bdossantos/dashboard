@@ -55,8 +55,8 @@ SCHEDULER.every '15s' do
   document = Nokogiri::HTML(open(url, :http_basic_authentication => [ENV['THRUK_USER'], ENV['THRUK_PASSWORD']]))
   send_event 'summary', {
     items: {
-      services_ok: document.css('.serviceTotalsOK').text,
-      services_warning: document.css('.serviceTotalsWARNING').text,
+      services_ok: document.css('table.serviceTotals:nth-child(1) tr:nth-child(2) td:nth-child(1)').first.text,
+      services_warning: document.css('table.serviceTotals:nth-child(1) tr:nth-child(2) td:nth-child(2)').first.text,
       services_critical: document.css('table.serviceTotals:nth-child(1) tr:nth-child(2) td:nth-child(4)').first.text,
       services_pending: document.css('table.serviceTotals:nth-child(1) tr:nth-child(2) td:nth-child(5)').first.text,
       services_unknown: document.css('table.serviceTotals:nth-child(1) tr:nth-child(2) td:nth-child(3)').first.text,
