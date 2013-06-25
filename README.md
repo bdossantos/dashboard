@@ -59,6 +59,15 @@ overscan_top=-40
 overscan_bottom=-40
 ```
 
+## Disable Power saving
+
+edit `/etc/kbd/config`
+
+```
+BLANK_TIME=0
+POWERDOWN_TIME=0
+```
+
 ## Ressources
 
 * [Dashing documentation](http://shopify.github.com/dashing)
