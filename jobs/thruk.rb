@@ -1,28 +1,39 @@
-require 'net/http'
+require 'httparty'
 require 'nokogiri'
-require 'open-uri'
-require 'json'
 require 'time'
 require 'uri'
 
-SCHEDULER.every '15s' do
-  uri = URI.parse(ENV['THRUK_URI'] || 'http://localhost')
-  http = Net::HTTP.new(uri.host)
-  request_uri = '/thruk/cgi-bin/status.cgi?servicestatustypes=28&style=detail&sortoption=4&hoststatustypes=15&hostgroup=all&view_mode=json&sorttype=2'
-  request = Net::HTTP::Get.new(request_uri)
-  request.basic_auth(ENV['THRUK_USER'], ENV['THRUK_PASSWORD'])
-  response = http.request(request)
+class Thruk
+  include HTTParty
 
-  if response.code != "200"
+  uri = URI.parse(ENV['THRUK_URI'] || 'http://localhost')
+  base_uri uri.host
+
+  def initialize(u, p)
+    @auth = {:username => u, :password => p}
+  end
+
+  def alerts(request_uri, options={})
+    options.merge!({:basic_auth => @auth})
+    self.class.get(request_uri, options)
+  end
+end
+
+SCHEDULER.every '15s' do
+  request_uri = '/thruk/cgi-bin/status.cgi?servicestatustypes=28&style=detail&sortoption=4&hoststatustypes=15&hostgroup=all&view_mode=json&sorttype=2'
+  thruk = Thruk.new(ENV['THRUK_USER'], ENV['THRUK_PASSWORD'])
+  response = thruk.alerts(request_uri)
+
+  if response.code != 200
     puts "Thruk backend communication error (status-code: #{response.code})\n#{response.body}"
   else
-    alerts = JSON.parse(response.body)
-    
-    unless alerts.nil? || alerts == 0
+    alerts = response.parsed_response
+
+    unless alerts.any?
       # when everuthing is OK, populate dashboard w/ random check
       request_uri = '/thruk/cgi-bin/status.cgi?sortoption=4&view_mode=json&sorttype=2&host=all'
-      response = http.request(request)
-      alerts = JSON.parse(response.body)
+      response = thruk.alerts(request_uri)
+      alerts = response.parsed_response
     end
 
     alerts.map! do |alert|
@@ -51,8 +62,8 @@ SCHEDULER.every '15s' do
   end
   
   # Scrap summary
-  url = "#{uri.scheme}://#{uri.host}/thruk/cgi-bin/status.cgi?host=all"
-  document = Nokogiri::HTML(open(url, :http_basic_authentication => [ENV['THRUK_USER'], ENV['THRUK_PASSWORD']]))
+  request_uri = '/thruk/cgi-bin/status.cgi?host=all'
+  document = Nokogiri::HTML(thruk.alerts(request_uri).body)
   send_event 'summary', {
     items: {
       services_ok: document.css('table.serviceTotals:nth-child(1) tr:nth-child(2) td:nth-child(1)').first.text,

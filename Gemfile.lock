@@ -21,7 +21,11 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.3)
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     multi_json (1.7.6)
+    multi_xml (0.5.4)
     nokogiri (1.5.9)
     rack (1.5.2)
     rack-protection (1.5.0)
@@ -60,4 +64,5 @@ PLATFORMS
 
 DEPENDENCIES
   dashing
+  httparty
   nokogiri
