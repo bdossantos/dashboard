@@ -6,7 +6,7 @@
 
 ```bash
 gem install bundler
-bundle instal
+bundle install
 dashing start -a 127.0.0.1 -p 3030 -u www-data -g www-data -d
 ```
 
@@ -29,10 +29,10 @@ export PAPERTRAIL_TOKEN=''
 Install chromium, x11 server utils and unclutter :
 
 ```
-apt-get install chromium x11-xserver-utils unclutter
+apt-get install chromium x11-xserver-utils unclutter xscreensaver
 ```
 
-edit `/etc/xdg/lxsession/LXDE/autostar` :
+edit `/etc/xdg/lxsession/LXDE/autostart` :
 
 ```
 @lxpanel --profile LXDE
