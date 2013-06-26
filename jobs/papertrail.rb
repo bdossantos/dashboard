@@ -1,4 +1,19 @@
-require_relative '../lib/papertrail'
+require 'httparty'
+require 'uri'
+
+class Papertrail
+  def initialize(search)
+    @search = URI.escape(search)
+  end
+
+  def search(min_id = '')
+    response = HTTParty.get(
+      "https://papertrailapp.com/api/v1/events/search.json?q='#{@search}'&min_id=#{min_id}",
+      :headers => { 'X-Papertrail-Token' => ENV['PAPERTRAIL_TOKEN'] }
+    )
+    response.parsed_response
+  end
+end
 
 searches = [
   'No such file or directory',
@@ -12,10 +27,10 @@ searches.each do |search|
   points = []
 
   papertrail = Papertrail.new search
-  json = papertrail.fetch
+  json = papertrail.search
 
   SCHEDULER.every '4s' do
-    json = papertrail.fetch(json['max_id'])
+    json = papertrail.search(json['max_id'])
     last_x += 1
     points << { x: last_x, y: json['events'].count  }
     send_event search.downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, ''), 
