@@ -19,7 +19,7 @@ class Thruk
   end
 end
 
-SCHEDULER.every '15s' do
+SCHEDULER.every '15s', :first_in => 0 do
   request_uri = '/thruk/cgi-bin/status.cgi?servicestatustypes=28&style=detail&sortoption=4&hoststatustypes=15&hostgroup=all&view_mode=json&sorttype=2'
   thruk = Thruk.new(ENV['THRUK_USER'], ENV['THRUK_PASSWORD'])
   response = thruk.alerts(request_uri)

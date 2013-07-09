@@ -29,7 +29,7 @@ searches.each do |search|
   papertrail = Papertrail.new search
   json = papertrail.search
 
-  SCHEDULER.every '4s' do
+  SCHEDULER.every '4s', :first_in => 0 do
     json = papertrail.search(json['max_id'])
     last_x += 1
     points << { x: last_x, y: json['events'].count  }
