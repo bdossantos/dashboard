@@ -20,6 +20,9 @@ export THRUK_PASSWORD=''
 
 # Papertrail API
 export PAPERTRAIL_TOKEN=''
+
+# Jenkins
+export JENKINS_URI='http://ci.company.tld'
 ```
 
 ## Bonus : Raspberry Pi config
