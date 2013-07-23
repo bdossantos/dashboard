@@ -1,3 +1,20 @@
+h1 {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+q {
+  quotes: "“ " " ”" "‘ " " ’";
+  font-style: italic;
+}
+
+q:before {
+    content: open-quote;
+}
+
+q:after {
+    content: close-quote;
+}
+
 table {
   max-width: 100%;
   background-color: transparent;
