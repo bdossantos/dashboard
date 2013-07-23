@@ -61,6 +61,7 @@ GEM
     thor (0.18.1)
     tilt (1.4.1)
     tzinfo (1.0.1)
+    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
@@ -70,3 +71,4 @@ DEPENDENCIES
   htmlentities
   httparty
   nokogiri
+  xml-simple
