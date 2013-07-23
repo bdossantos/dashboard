@@ -60,7 +60,16 @@ SCHEDULER.every '15s', :first_in => 0 do
     end
     send_event 'thruk', { items: alerts.first(4) }
   end
-  
+
+  # Get scheduled downtimes
+  request_uri = '/thruk/cgi-bin/extinfo.cgi?type=6&view_mode=json'
+  downtimes = thruk.alerts(request_uri).parsed_response
+
+  if downtimes['host'] || downtimes['service']
+    downtimes = downtimes['host'].concat(downtimes['service'])
+    send_event 'downtimes', { items: downtimes.shuffle.first(4).to_json }
+  end
+
   # Scrap summary
   request_uri = '/thruk/cgi-bin/status.cgi?host=all'
   document = Nokogiri::HTML(thruk.alerts(request_uri).body)
