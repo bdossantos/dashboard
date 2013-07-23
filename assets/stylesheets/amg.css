@@ -82,11 +82,11 @@ table {
   letter-spacing: 1px;
 }
 
-.badge .ok {
+.badge .ok, .badge .success {
   background-color: #468847;
 }
 
-.badge .critical {
+.badge .critical, .badge .failure {
   background-color: #b94a48;
 }
 
