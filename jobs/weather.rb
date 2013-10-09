@@ -1,16 +1,16 @@
 require 'net/http'
 require 'xmlsimple'
- 
+
 # Get a WOEID (Where On Earth ID)
 # for your location from here:
 # http://woeid.rosselliot.co.nz/
-woe_id = 615702 
- 
+woe_id = 615702
+
 # Temerature format:
 # 'c' for Celcius
 # 'f' for Fahrenheit
 format = 'c'
- 
+
 SCHEDULER.every '1s', :first_in => 0 do |job|
   http = Net::HTTP.new('weather.yahooapis.com')
   response = http.request(Net::HTTP::Get.new("/forecastrss?w=#{woe_id}&u=#{format}"))
@@ -21,105 +21,105 @@ SCHEDULER.every '1s', :first_in => 0 do |job|
                           :title => "#{weather_location['city']} Weather",
                           :climacon => climacon_class(weather_data['code'])})
 end
- 
- 
+
+
 def climacon_class(weather_code)
   case weather_code.to_i
-  when 0 
+  when 0
     'tornado'
-  when 1 
+  when 1
     'tornado'
-  when 2 
+  when 2
     'tornado'
-  when 3 
+  when 3
     'lightning'
-  when 4 
+  when 4
     'lightning'
-  when 5 
+  when 5
     'snow'
-  when 6 
+  when 6
     'sleet'
-  when 7 
+  when 7
     'snow'
-  when 8 
+  when 8
     'drizzle'
-  when 9 
+  when 9
     'drizzle'
-  when 10 
+  when 10
     'sleet'
-  when 11 
+  when 11
     'rain'
-  when 12 
+  when 12
     'rain'
-  when 13 
+  when 13
     'snow'
-  when 14 
+  when 14
     'snow'
-  when 15 
+  when 15
     'snow'
-  when 16 
+  when 16
     'snow'
-  when 17 
+  when 17
     'hail'
-  when 18 
+  when 18
     'sleet'
-  when 19 
+  when 19
     'haze'
-  when 20 
+  when 20
     'fog'
-  when 21 
+  when 21
     'haze'
-  when 22 
+  when 22
     'haze'
-  when 23 
+  when 23
     'wind'
-  when 24 
+  when 24
     'wind'
-  when 25 
+  when 25
     'thermometer low'
-  when 26 
+  when 26
     'cloud'
-  when 27 
+  when 27
     'cloud moon'
-  when 28 
+  when 28
     'cloud sun'
-  when 29 
+  when 29
     'cloud moon'
-  when 30 
+  when 30
     'cloud sun'
-  when 31 
+  when 31
     'moon'
-  when 32 
+  when 32
     'sun'
-  when 33 
+  when 33
     'moon'
-  when 34 
+  when 34
     'sun'
-  when 35 
+  when 35
     'hail'
-  when 36 
+  when 36
     'thermometer full'
-  when 37 
+  when 37
     'lightning'
-  when 38 
+  when 38
     'lightning'
-  when 39 
+  when 39
     'lightning'
-  when 40 
+  when 40
     'rain'
-  when 41 
+  when 41
     'snow'
-  when 42 
+  when 42
     'snow'
-  when 43 
+  when 43
     'snow'
-  when 44 
+  when 44
     'cloud'
-  when 45 
+  when 45
     'lightning'
-  when 46 
+  when 46
     'snow'
-  when 47 
+  when 47
     'lightning'
   end
 end

@@ -49,9 +49,9 @@ SCHEDULER.every '15s', :first_in => 0 do
       rescue
         time = 'N/A'
       end
-      
-      { 
-        hostname: alert['host_name'], 
+
+      {
+        hostname: alert['host_name'],
         detail: alert['plugin_output'],
         description: alert['description'],
         state: state,
