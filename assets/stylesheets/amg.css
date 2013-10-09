@@ -107,7 +107,7 @@ table {
   background-color: #b94a48;
 }
 
-.badge .warning {
+.badge .warning, .badge .unknown {
   background-color: #f89406;
 }
 
